@@ -6,7 +6,8 @@ $dotenv = new PHPEnv\DotEnv(__DIR__ . '/../.env');
 $dotenv->load();
 
 
-$json = file_get_contents('credentials.json'); 
+$json_path = __DIR__ . '/credentials.json';
+$json = file_get_contents($json_path); 
 $json_data = json_decode($json,true); 
 
 
