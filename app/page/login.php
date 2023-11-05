@@ -1,3 +1,11 @@
+<?php session_start(); 
+
+
+  if (isset($_SESSION['user'])) {
+    header("Location: /page/app.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,10 +33,12 @@
       <p class="right_text right_subtitle">
         Login
       </p>
-       <input type="email" name="email" id="email" placeholder="Email" class="input_control">
-        <input type="password" name="password" id="password" placeholder="Password" class="input_control">
+      <form name="login" action="/controller/proccess.php" method="post">
+        <input type="email" name="email" id="email" placeholder="Email" class="input_control" required>
+        <input type="password" name="password" id="password" placeholder="Password" class="input_control" required>
        
-        <a href="#" class="btn">Login</a>
+        <button type="submit" name="login"  class="btn">Login</button>
+      </form>
       </div>
       <div class="signin_group">
         <p id="already">

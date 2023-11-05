@@ -1,5 +1,16 @@
+<?php
+  include_once '../controller/db.php';
+  session_start(); 
+
+  if (isset($_SESSION['user'])) {
+    header("Location: /page/app.php");
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
   <meta charset="UTF-8">
@@ -25,11 +36,13 @@
       <p class="right_text right_subtitle">
         Register
       </p>
-       <input type="email" name="email" id="email" placeholder="Email" class="input_control">
-        <input type="password" name="password" id="password" placeholder="Password" class="input_control">
-        <input type="password" name="password" id="password" placeholder="Confirm Password" class="input_control">
-       
-        <a href="#" class="btn">Register</a>
+      <form name="register" action="/controller/proccess.php" method="post">
+        <input type="email" name="email" id="email" placeholder="Email" class="input_control" required>
+        <input type="password" name="password" id="password" placeholder="Password" class="input_control" required>
+        <input type="password" name="confirm_password" id="password" placeholder="Confirm Password" class="input_control" required>
+        
+        <button type="submit" name="register"  class="btn">Register</button>
+      </form>
       </div>
       <div class="signin_group">
         <p id="already">

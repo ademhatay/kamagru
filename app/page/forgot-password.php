@@ -28,6 +28,15 @@
        <input type="email" name="email" id="email" placeholder="Email" class="input_control">
         <a href="#"  class="btn">Send</a>
       </div>
+
+      <div class="signin_group">
+        <p id="already">
+            Did you remember your password?
+        </p>
+        <a href="/page/login.php" class="btn signin_btn">
+            Login
+        </a>
+      </div>
       
     </div>
   </div>

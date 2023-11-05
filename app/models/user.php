@@ -16,10 +16,6 @@ class User {
         return $this->id;
     }
 
-    public function setId($id) {
-        $this->id = $id;
-    }
-
     public function getEmail() {
         return $this->email;
     }
@@ -42,21 +38,6 @@ class User {
 
     public function setVerified($verified) {
         $this->verified = $verified;
-    }
-
-    public function login($email, $password) {
-        if ($this->email == $email && $this->password == $password) {
-            echo "Giriş Başarılı. Hoş geldiniz, {$this->email}!";
-        } else {
-            echo "Giriş Başarısız. Lütfen e-posta ve şifrenizi kontrol edin.";
-        }
-    }
-
-    public function register($email, $password) {
-        $this->email = $email;
-        $this->password = $password;
-        $this->verified = false;
-        echo "Kayıt Başarılı. Aktivasyon e-postası gönderildi.";
     }
 }
 ?>
