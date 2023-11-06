@@ -12,16 +12,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-    function sendVerificationEmail($userEmail, $token)
+    function sendVerificationEmail($userEmail, $template, $subject)
     {
         $mail = new PHPMailer(true);
 
         $mail->CharSet = 'UTF-8';
-        $path = __DIR__ . "./../views/email-verification-template.html";
-
-        $email_template = file_get_contents($path);
-
-        $email_template = str_replace("{{token}}", $token, $email_template);
 
         try {
             // SMTP ayarları
@@ -38,8 +33,8 @@ use PHPMailer\PHPMailer\Exception;
             $mail->addAddress($userEmail);
 
             $mail->isHTML(true);
-            $mail->Subject = 'E-posta Doğrulama';
-            $mail->Body = $email_template;
+            $mail->Subject = $subject;
+            $mail->Body = $template;
             
             $mail->send();
             return true;

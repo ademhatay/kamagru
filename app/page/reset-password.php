@@ -29,24 +29,17 @@
     <div class="cont_item right">
         <div class="register_group">
         <p class="right_text right_subtitle">
-        Forgot Password?
+        Reset Password
         </p>
         <span>
-          Enter your email address and we'll send you a link to reset your password.
+         Enter new password
         </span>
-        <form action="../controller/proccess.php" method="POST" name="forgot_password">
-          <input type="email" name="email" id="email" placeholder="Email" class="input_control">
-          <button type="submit" name="forgot_password" class="btn">Send</button>
+        <form action="../controller/proccess.php" method="POST" name="new_password">
+            <input type="password" name="password" id="password" placeholder="Password" class="input_control" required>
+            <input type="password" name="password_repeat" id="password_repeat" placeholder="Repeat Password" class="input_control" required>
+            <input type="hidden" name="token" value="<?php echo $_GET['token']; ?>">
+          <button type="submit" name="new_password" class="btn">Send</button>
         </form>
-      </div>
-
-      <div class="signin_group">
-        <p id="already">
-            Did you remember your password?
-        </p>
-        <a href="/page/login.php" class="btn signin_btn">
-            Login
-        </a>
       </div>
       
     </div>
