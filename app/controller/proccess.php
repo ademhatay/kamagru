@@ -80,7 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
                 } else {
                     // if user account is verified redirect to app page
                     session_start();
-                    $_SESSION['user'] = new User($result['_id'], $result['_email'], $result['_password'], $result['_verified']);
+                    $_SESSION['user_mail'] = $result['_email'];
+                    $_SESSION['user_id'] = $result['_id'];
                     echo "<script>location.replace('/page/app.php');</script>";
                     exit();
                 }
@@ -170,5 +171,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["new_password"])) {
         }
     }
 }
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["profile"])) {
+    $password = $_POST["password"];
+    $notification_permission = $_POST["_notification_permission"];
+   
+    echo $notification_permission;
+
+    $userId = $_SESSION['user_id'];
+
+    if (!empty($password)) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE users SET _password = :password, _notification_permission = :notification_permission WHERE _id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['password' => $hashedPassword, 'notification_permission' => $notification_permission, 'id' => $userId]);
+    } else {
+        $sql = "UPDATE users SET _notification_permission = :notification_permission WHERE _id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['notification_permission' => $notification_permission, 'id' => $userId]);
+    }
+
+    echo "<script>location.replace('/page/profile.php?success=profileupdated');</script>";
+
+
+    exit();
+}
+
 
 ?>

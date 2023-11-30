@@ -44,4 +44,15 @@ use PHPMailer\PHPMailer\Exception;
         }
     }
 
+
+    function convertHashtags($metin) {
+        $kelimeler = preg_grep("/^#(.*)$/", explode(" ", $metin));
+      
+        foreach ($kelimeler as $kelime) {
+          $metin = str_replace($kelime, "<span style='color: rgb(0, 55, 107); cursor: pointer'>$kelime</span>", $metin);
+        }
+      
+        return $metin;
+      }
+
 ?>

@@ -30,9 +30,9 @@ button {
 }
 
 .container {
-    height: 100vh;
     margin: 0 auto;
     display: flex;
+    justify-items: center;
 }
 
 .cont_item {
@@ -44,12 +44,17 @@ button {
 
 
 header {
+    width: 100%;
     max-width: 240px;
-    flex: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     border-right: 0.8px solid rgb(219, 219, 219);
     justify-content: space-evenly;
+    padding-bottom: 15px;
 }
 
 nav {
@@ -64,8 +69,6 @@ nav {
 nav ul {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
     height: 100%;
     width: 100%;
     max-height: 350px;
@@ -74,18 +77,17 @@ nav ul {
 nav ul li {
     width: 100%;
     height: 100%;
-    display: flex;
 }
 
 nav ul li a {
     width: 100%;
     text-align: center;
     font-size: 20px;
-    padding: 20px 0;
+    padding: 20px;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 }
 
 
@@ -101,14 +103,22 @@ nav ul li a img {
     margin-right: 10px;
 }
 
-main {
+.main {
     flex: 2;
+    margin-left: 240px;
 }
 
-aside {
-    max-width: 300px;
-    background-color: green;
+
+.rightbar {
+    max-width: 200px;
+    height: 70vh;
     flex: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: static;
+    top: 0;
+    right: 0;
+    padding: 0 20px;
 }
 
 .logo {
@@ -118,11 +128,12 @@ aside {
 
 .logo a {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     height: 100%;
     font-size: 30px;
     font-weight: 800;
+    padding: 0 20px;
 }
 
 .btn {
@@ -136,7 +147,6 @@ aside {
     font-weight: 700;
     color: rgb(247, 249, 249);
     background-color: #1DA1F2;
-    margin: 10px 0;
 }
 
 .btn:hover {
@@ -152,4 +162,389 @@ aside {
 .logout {
     width: 100%;
     padding: 0 20px;
+}
+
+.card_group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 630px;
+}
+
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 10px 0;
+    max-width: 470px;
+    position: relative;
+}
+
+.card_header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card_header_info img {
+    width: 20px;
+    cursor: default;
+    margin-right: 5px;
+}
+
+.card_header_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.card_body {
+    width: 100%;
+    height: 100%;
+}
+
+.card_body img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 468px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.card_footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card_footer_up {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card_footer_bottom {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(38, 38, 38);
+}
+
+.card_description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: black;
+}
+
+.username {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(38, 38, 38);
+}
+
+.likes {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.card_footer_left img {
+    margin-right: 10px;
+}
+
+.card_comment {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input_comment {
+    width: 100%;
+    height: 38px;
+    border-radius: 30px;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(38, 38, 38);
+    margin: 10px 0;
+}
+
+.commentBtn {
+    height: 30px;
+    font-weight: 600;
+}
+
+.comments {
+    margin-top: 10px;
+}
+
+.comment {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.comment .username {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgb(38, 38, 38);
+}
+
+.gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 468px;
+    border-radius: 5px;
+    margin: 10px 0;
+    aspect-ratio: 1/1;
+}
+
+.gallery {
+    position: relative;
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    justify-self: center;
+}
+
+.img_card {
+    position: relative;
+}
+
+.img_card img {
+    max-width: 100%;
+}
+
+.img_card span {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+
+.img_card:hover span {
+    display: block;
+}
+
+.box {
+    background-color: red;
+    width: 100%;
+    height: 400px
+}
+
+video {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+  }
+
+.box .preview {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+    max-width: 468px;
+    border-radius: 5px;
+    margin: 10px 0;
+    aspect-ratio: 1/1;
+}
+
+.box .start-camera {
+    width: 100%;
+    height: 10%;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filterbox {
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    padding: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: peru;
+    display: none;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+    box-sizing: border-box;
+    overflow: none;
+}
+
+.filterbox--open {
+    display: grid !important;
+}
+
+.close {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.filter {
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    margin-right: 10px;
+}
+
+.btn_group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.my-5 {
+    margin: 1rem 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    header {
+        display: none;
+        border: 0;
+    }
+
+
+    header .container {
+        display: none;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .logout {
+        display: none;
+    }
+
+    .main {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    .rightbar {
+        display: none;
+    }
+
+    .card_group {
+        max-width: 470px;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    .filterbox {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .filterbox {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table td,
+.table th {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 16px;
+}
+
+.table th {
+    background-color: #92c9e6;
+    color: #ffffff;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #d1e8f5;
+}
+
+/*responsive*/
+
+@media (max-width: 500px) {
+    .table thead {
+        display: none;
+    }
+
+    .table,
+    .table tbody,
+    .table tr,
+    .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+    }
+
+    .table td {
+        padding-left: 50%;
+        text-align: left;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
 }
