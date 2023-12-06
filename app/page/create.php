@@ -79,7 +79,10 @@ if (isset($_POST['logout'])) {
                 </div>
                 <div class="btn_group">
                     <button class="btn" id="capture">Capture</button>
+                    <button class="btn" id="clear">Clear</button>
                 </div>
+                <canvas id="canvas"></canvas>
+                <div id="photos"></div>
                 <div class="filterbox">
                         <div class="close">
                             CLOSE
