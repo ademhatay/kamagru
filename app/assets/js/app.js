@@ -8,8 +8,10 @@ const cameraList = document.querySelector('#cameras');
 const canvas = document.getElementById('canvas');
 const clearButton = document.getElementById('clear');
 const photoButton = document.getElementById('capture');
+const filters = document.querySelectorAll('.filter');
 let selectedCameraId;
 let filter = 'none';
+let uploadedImage = null;
 
 navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
     video.srcObject = stream;
@@ -62,19 +64,25 @@ function handleError(error) {
 
 function takePicture() {
     const context = canvas.getContext('2d');
-      canvas.width = 640;
-      canvas.height = 360;
-      context.drawImage(video, 0, 0, 640, 360);
-  
-      const imgUrl = canvas.toDataURL('image/png');
-  
-      const img = document.createElement('img');
-  
-      img.setAttribute('src', imgUrl);
-      photos.appendChild(img);
-  }
+    canvas.width = 640;
+    canvas.height = 360;
+    context.drawImage(video, 0, 0, 640, 360);
 
-  document.getElementById('upload').addEventListener('click', function () {
+    const imgUrl = canvas.toDataURL('image/png');
+
+    if (uploadedImage) {
+        photos.removeChild(uploadedImage);
+    }
+
+    const img = document.createElement('img');
+    img.setAttribute('src', imgUrl);
+    img.style.filter = filter;
+    photos.appendChild(img);
+
+    uploadedImage = img;
+}
+
+document.getElementById('upload').addEventListener('click', function () {
     var input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -86,12 +94,20 @@ function takePicture() {
             var reader = new FileReader();
 
             reader.onload = function (e) {
+                if (uploadedImage) {
+                    photos.removeChild(uploadedImage);
+                }
+
                 var img = document.createElement('img');
                 img.src = e.target.result;
                 img.width = 640;
                 img.height = 360;
 
+                img.style.filter = filter;
+
                 document.getElementById('photos').appendChild(img);
+
+                uploadedImage = img;
             };
 
             reader.readAsDataURL(file);
@@ -102,12 +118,23 @@ function takePicture() {
 });
 
 
-  function clear() {
+filters.forEach(filterItem => {
+    filterItem.addEventListener('click', function () {
+        filter = filterItem.getAttribute('value');
+        video.style.filter = filter;
+        filterbox.classList.remove('filterbox--open');
+    });
+});
+
+function clear() {
     photos.innerHTML = '';
     filter = 'none';
     video.style.filter = filter;
-  }
-  
+
+    uploadedImage = null;
+    
+}
+
 
 
 

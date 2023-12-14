@@ -87,26 +87,27 @@ if (isset($_POST['logout'])) {
                         <div class="close">
                             CLOSE
                         </div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
-                        <div class="filter"></div>
+                        <div class="filter" value="none">
+                            Default
+                        </div>
+                        <div class="filter" value="grayscale(100%)">
+                            Grayscale
+                        </div>
+                        <div class="filter" value="sepia(100%)">
+                            Sepia
+                        </div>
+                        <div class="filter" value="invert(100%)">
+                            Invert
+                        </div>
+                        <div class="filter" value="blur(10px)">
+                            Blur
+                        </div>
+                        <div class="filter" value="hue-rotate(90deg)">
+                            Hue
+                        </div>
+                        <div class="filter" value="contrast(200%)">
+                            Constrast
+                        </div>
                 </div>
             </div>
             
