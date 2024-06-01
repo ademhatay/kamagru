@@ -14,13 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
     
 
     if (empty($email) || empty($password) || empty($confirm_password)) {
-        header("Location: /page/register.php?error=emptyfields");
+        echo "<script>location.replace('/page/register.php?error=emptyfields');</script>";
         exit();
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: /page/register.php?error=invalidemail");
+        echo "<script>location.replace('/page/register.php?error=invalidemail');</script>";
         exit();
     } else if ($password !== $confirm_password) {
-        header("Location: /page/register.php?error=passwordsdontmatch");
+        echo "<script>location.replace('/page/register.php?error=passwordsdontmatch');</script>";
         exit();
     } else {
         $sql = "SELECT * FROM users WHERE _email = :email";
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
         $stmt->execute(['email' => $email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($result) {
-            header("Location: /page/register.php?error=emailtaken");
+            echo "<script>location.replace('/page/register.php?error=emailtaken');</script>";
             exit();
         } else {
             $sql = "INSERT INTO users (_email, _password, _verification_token) VALUES (:email, :password, :verification_token)";
@@ -45,10 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
             $email_template = str_replace("{{token}}", $result['_verification_token'], $email_template);
             sendVerificationEmail($result['_email'], $email_template , "Verify your email address");
             if ($result) {
-                header("Location: /page/login.php?success=registered");
+                echo "<script>location.replace('/page/login.php?success=registered');</script>";
                 exit();
             } else {
-                header("Location: /page/register.php?error=sqlerror");
+                echo "<script>location.replace('/page/register.php?error=sqlerror');</script>";
                 exit();
             }
         }
@@ -101,10 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["forgot_password"])) {
     $email = $_POST["email"];
 
     if (empty($email)) {
-        header("Location: /page/forgot-password.php?error=emptyfields");
+        echo "<script>location.replace('/page/forgot-password.php?error=emptyfields');</script>";
         exit();
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: /page/forgot-password.php?error=invalidemail");
+        echo "<script>location.replace('/page/forgot-password.php?error=invalidemail');</script>";
         exit();
     } else {
         $sql = "SELECT * FROM users WHERE _email = :email";
@@ -122,10 +122,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["forgot_password"])) {
     
             $email_template = str_replace("{{token}}", $result['_verification_token'], $email_template);
             sendVerificationEmail($result['_email'], $email_template , "Reset your password");
-            header("Location: /page/forgot-password.php?success=resetlinksent");
+            echo "<script>location.replace('/index.php?success=mailsent');</script>";
             exit();
         } else {
-            header("Location: /page/forgot-password.php?error=nouser");
+            echo "<script>location.replace('/page/forgot-password.php?error=nouser');</script>";
             exit();
         }
     }
@@ -141,10 +141,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["new_password"])) {
 
 
     if (empty($password) || empty($password_repeat)) {
-        header("Location: /page/reset-password.php?error=emptyfields");
+        echo "<script>location.replace('/page/reset-password.php?error=emptyfields');</script>";
         exit();
     } else if ($password !== $password_repeat) {
-        header("Location: /page/reset-password.php?error=passwordsdontmatch");
+        echo "<script>location.replace('/page/reset-password.php?error=passwordsdontmatch');</script>";
         exit();
     } else {
         $sql = 'SELECT * FROM users WHERE _verification_token = :token';
@@ -163,10 +163,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["new_password"])) {
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['password' => $newPassword, 'token' => bin2hex(random_bytes(16)), 'id' => $userId]);
 
-            header("Location: /page/login.php?success=passwordreset");
+            echo "<script>location.replace('/page/login.php?success=passwordchanged');</script>";
             exit();
         } else {
-            header("Location: /page/reset-password.php?error=invalidtoken");
+            echo "<script>location.replace('/page/reset-password.php?error=invalidtoken');</script>";
             exit();
         }
     }
