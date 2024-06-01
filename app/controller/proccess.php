@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["forgot_password"])) {
 
             $email_template = file_get_contents($path);
     
-            $email_template = str_replace("{{token}}", $result['_verification_token'], $email_template);
+            $email_template = str_replace("{{token}}", $token, $email_template);
             sendVerificationEmail($result['_email'], $email_template , "Reset your password");
             echo "<script>location.replace('/index.php?success=mailsent');</script>";
             exit();
