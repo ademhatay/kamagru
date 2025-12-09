@@ -1,33 +1,66 @@
-version: "3.9"
 services:
   php-apache:
+    container_name: kamagru-php
+    build: 
+      context: ./build/php
+      dockerfile: Dockerfile
     ports:
       - "80:80"
-    build: './build/php'
     volumes:
       - ./app:/var/www/html
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - kamagru-network
+
   mysql:
+    container_name: kamagru-mysql
+    image: mariadb:10.11-jammy
     ports:
       - "3306:3306"
-    build: './build/mysql'
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ALLOW_EMPTY_PASSWORD=1
     volumes:
-      - ./db_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+      - ./build/mysql/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - kamagru-network
+
   phpmyadmin:
+    container_name: kamagru-phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
     ports:
       - "8080:80"
-    image: phpmyadmin/phpmyadmin
     restart: always
     environment:
-      - PMA_HOST=${PMA_HOST}
-      - PMA_PORT=${PMA_PORT}
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_USER=${MYSQL_USER}
+      - PMA_PASSWORD=${MYSQL_PASSWORD}
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+    networks:
+      - kamagru-network
+
+networks:
+  kamagru-network:
+    driver: bridge
 
 volumes:
-  app:
-  dbData:
+  mysql_data:
+    driver: local

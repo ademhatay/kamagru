@@ -1,9 +1,9 @@
 <?php
 
-$dbHost = ""; // Your database host
-$dbName = ""; // Your database name
-$dbUser = ""; // Your database username
-$dbPass = "";
+$dbHost = getenv('MYSQL_HOST') ?: "mysql";
+$dbName = getenv('MYSQL_DATABASE') ?: "kamagru";
+$dbUser = getenv('MYSQL_USER') ?: "root";
+$dbPass = getenv('MYSQL_PASSWORD') ?: "";
 
 try {
     $pdo = new PDO("mysql:host=".$dbHost.";dbname=".$dbName, $dbUser, $dbPass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
